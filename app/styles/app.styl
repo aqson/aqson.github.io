@@ -1,0 +1,195 @@
+//Launch helpers
+
+global-reset()
+reset-html5()
+
+//Declare some stuff
+
+random(min, max)
+  return math(math(0, 'random')*(max - min + 1) + min, 'floor')px
+
+multipleBoxShadow(n)
+  value = random(0, 2000) random(0, 2000) #fff1df
+  for $i in 0..n
+    value = value, random(0, 2000) random(0, 2000) #fff1df
+  return value
+
+bigStars    = multipleBoxShadow(700)
+mediumStars = multipleBoxShadow(200)
+smallStarts = multipleBoxShadow(100)
+
+//App
+
+html
+  box-sizing: border-box
+
+*, *:before, *:after
+  box-sizing: inherit
+
+.app
+  display: flex
+  flex-direction: column
+  flex-wrap: wrap
+  background-color: #FAFBE3
+  //background: #FEF9F0
+  font-family: 'Hind'
+
+@-webkit-keyframes rotate
+  from
+    transform: rotate(0deg)
+  to
+   transform: rotate(360deg)
+
+@-webkit-keyframes rotateRecursive
+  from
+    transform: rotate(360deg)
+  to
+   transform: rotate(0deg)
+
+@-webkit-keyframes launch
+  from
+    transform: translateY(0px)
+  to
+    transform: translateY(-2000px)
+
+header.header
+  display: flex
+  flex-direction: column
+  height: 300px
+  background: radial-gradient(ellipse at top, #1B2735 0%, #090A0F 100%)
+  overflow: hidden
+
+  .header-top
+    position: absolute
+    left: 0
+    right: 0
+    display: flex
+    align-items: center
+    justify-content: center
+    color: #000
+    padding: 10px
+    background: rgba(255,255,255,.7)
+    .nav
+      ul
+        text-transform: uppercase
+
+        li
+          display: inline-block
+          padding-right: 20px
+
+  .clouds
+    overflow: hidden
+    position: absolute
+    left: 0
+    right: 0
+    height: 295px
+
+    .cloud
+      position: absolute
+      opacity: .2
+
+      &:nth-of-type(1)
+        left: -140px
+        top: -50px
+        height: 600px
+        animation: rotate 200s linear infinite
+        //z-index: 5
+
+      &:nth-of-type(2)
+        left: 12%
+        top: -40px
+        height: 600px
+        animation: rotate 140s linear infinite
+        opacity: .1
+        //z-index: 3
+
+      &:nth-of-type(3)
+        left: 14%
+        top: -20px
+        height: 500px
+        animation: rotate 100s linear infinite
+        //z-index: 1
+
+      &:nth-of-type(4)
+        left: 50%
+        top: 10px
+        height: 600px
+        animation: rotate 100s linear infinite
+        //z-index: 3
+
+
+      &:nth-of-type(5)
+        left: 80%
+        top: -30px
+        height: 650px
+        animation: rotate 130s linear infinite
+        //z-index: 3
+
+
+  .title
+    margin: auto
+    //z-index: 111
+    text-align: center
+    color: #fff
+    //z-index: 0
+
+    h1
+      font-size: 4em
+      font-weight: 500
+
+    h3
+      font-size: 1.5em
+      font-weight: 300
+
+  .stars-small
+    width: 1px
+    height: 1px
+    background: transparent
+    box-shadow: bigStars
+    animation: launch 150s linear infinite
+
+    &:after
+      content: " "
+      position: absolute
+      top: 2000px
+      width: 1px
+      height: 1px
+      background: transparent
+      box-shadow: bigStars
+
+  .stars-medium
+    width: 2px
+    height: 2px
+    background: transparent
+    box-shadow: mediumStars
+    animation : launch 100s linear infinite
+
+    &:after
+      content: " "
+      position: absolute
+      top: 2000px
+      width: 2px
+      height: 2px
+      background: transparent
+      box-shadow: mediumStars
+
+  .stars-big
+    width: 3px
+    height: 3px
+    background: transparent
+    animation : launch 50s linear infinite
+    box-shadow: smallStarts
+
+    &:after
+      content: " "
+      position: absolute
+      top: 2000px
+      width: 3px
+      height: 3px
+      background: transparent
+      box-shadow: smallStarts
+
+  .content
+    overflow: hidden
+    height: 500px
+

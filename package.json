@@ -1,0 +1,28 @@
+{
+  "name": "your-app",
+  "description": "Description",
+  "author": "Your Name",
+  "version": "0.0.1",
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "scripts": {
+    "start": "brunch watch --server",
+    "test": "brunch test"
+  },
+  "dependencies": {
+    "auto-reload-brunch": ">= 1.0 < 1.8",
+    "autoprefixer-brunch": "^1.8.3",
+    "clean-css-brunch": ">= 1.0 < 1.8",
+    "coffee-script-brunch": ">= 1.0 < 1.8",
+    "css-brunch": ">= 1.0 < 1.8",
+    "javascript-brunch": ">= 1.0 < 1.8",
+    "json-brunch": "~1.5.4",
+    "react-brunch": "^1.0.6",
+    "react-coffee-brunch": "shreeve/react-coffee-brunch",
+    "stylus-brunch": ">= 1.0 < 1.8",
+    "sass-brunch": ">= 1.0 < 1.8",
+    "uglify-js-brunch": ">= 1.0 < 1.8"
+  }
+}

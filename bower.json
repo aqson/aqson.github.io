@@ -1,0 +1,18 @@
+{
+  "name": "aqson home",
+  "version": "0.0.1",
+  "main": "public/app.js",
+  "dependencies": {
+    "react": "~0.11.1",
+    "jquery": "~2.0.2",
+    "react-router": "~0.7.0",
+    "moment": "2.8.3"
+  },
+  "overrides": {
+    "react-router": {
+      "dependencies": {
+        "react": "*"
+      }
+    }
+  }
+}
