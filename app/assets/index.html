@@ -23,8 +23,9 @@
   <title>Yavorsky</title>
 
   <style>
-    @import url(http://fonts.googleapis.com/css?family=Noto+Sans:400,700,400italic,700italic|Cabin:400,500,600,700,400italic,500italic,600italic,700italic|Muli:300,400,300italic,400italic|Hind:400,300,500,600,700);
+    @import url(http://fonts.googleapis.com/css?family=Muli:300,400,300italic,400italic|Raleway:400,100,200,300,500,600,700,800,900);
   </style>
+  <script src="/javascripts/vendor.js"></script>
   <link rel="stylesheet" href="/stylesheets/app.css">
 </head>
 <body>
@@ -33,9 +34,10 @@
     <div class="header-top">
       <nav class="nav">
         <ul>
-          <li>About</li>
-          <li>Blog</li>
-          <li>Contact</li>
+          <li><a href="#">About</a></li>
+          <li><a href="#">Blog</a></li>
+          <li><a href="#">Contact</a></li>
+          <li><a href="#">Follow</a></li>
         </ul>
       </nav>
     </div>
@@ -51,11 +53,24 @@
     </div>
     <div class="title">
       <h3>Artem</h3>
-      <h1>Yavorsky</h1>
+      <h1>-Yavorsky-</h1>
     </div>
+    <div class="header-bottom"><img class="avatar" src="/img/avatar.png"/></div>
   </header>
   <div class="content">
   </div>
 </div>
+<script type="text/javascript">
+  $(function(){
+    $(window).on('scroll', function () {
+      var pos = document.body.scrollTop
+      if (pos >= 73) {
+        $('.header').addClass('minimized')
+      } else {
+        $('.header').removeClass('minimized')
+      }
+    })
+  })
+</script>
 </body>
 </html>
