@@ -30,20 +30,22 @@
 </head>
 <body>
 <div class="app">
-  <header class="header">
+  <header class="header minimized">
     <div class="header-top">
       <nav class="nav">
         <ul>
-          <li><a href="#">About</a></li>
+          <li><a class="active" href="#">About</a></li>
           <li><a href="#">Blog</a></li>
           <li><a href="#">Contact</a></li>
           <li><a href="#">Follow</a></li>
         </ul>
       </nav>
     </div>
-    <div class="stars-big"></div>
-    <div class="stars-medium"></div>
-    <div class="stars-small"></div>
+    <div class="stars">
+      <div class="stars-big"></div>
+      <div class="stars-medium"></div>
+      <div class="stars-small"></div>
+    </div>
     <div class="clouds">
       <img class="cloud" src="/img/cloud.png"></img>
       <img class="cloud" src="/img/cloud.png"></img>
@@ -57,18 +59,43 @@
     </div>
     <div class="header-bottom"><img class="avatar" src="/img/avatar.png"/></div>
   </header>
+  <div class="spacer minimized"></div>
   <div class="content">
+    <header class="content-header">
+      <div class="title">
+        <h1>Web Consultant</h1>
+        <h3>...development, maintenance, analytics...</h3>
+      </div>
+    </header>
+    <div class="reviews">
+      <ul>
+        <li>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p>
+        </li>
+        <li>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p>
+        </li>
+    </div>
   </div>
 </div>
 <script type="text/javascript">
   $(function(){
-    $(window).on('scroll', function () {
+    var prev = 0;
+    $('.header, .spacer').removeClass('minimized')
+    $(window).on('scroll', function (e) {
+      console.log(e)
       var pos = document.body.scrollTop
-      if (pos >= 73) {
-        $('.header').addClass('minimized')
-      } else {
-        $('.header').removeClass('minimized')
+      console.log(pos)
+      var scrollDownChangePosition = 76;
+      var scrollUpChangePosition = 300;
+      if (pos >= scrollDownChangePosition) {
+        console.log('!')
+        $('.header, .spacer').addClass('minimized')
+      } else if (pos < scrollUpChangePosition) {
+        console.log('!!')
+        $('.header, .spacer').removeClass('minimized')
       }
+      prev = pos
     })
   })
 </script>

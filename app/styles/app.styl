@@ -1,4 +1,4 @@
-//Launch helpers
+//starfall helpers
 
 global-reset()
 reset-html5()
@@ -14,9 +14,21 @@ multipleBoxShadow(n)
     value = value, random(0, 2000) random(0, 2000) #fff1df
   return value
 
-bigStars    = multipleBoxShadow(700)
-mediumStars = multipleBoxShadow(200)
-smallStarts = multipleBoxShadow(100)
+//stars
+
+// $bigStars    = multipleBoxShadow(700)
+// $mediumStars = multipleBoxShadow(200)
+// $smallStarts = multipleBoxShadow(100)
+
+//Colors
+
+$white = #FFF
+$black = #000
+$dark  = #404040
+$gray  = #B8E0D4
+$azure = radial-gradient(ellipse at top, #1B2735 0%, #090A0F 100%)
+$glow  = 0 0px 15px rgba(59, 225, 255, .8)
+$hover =  0 0px 10px #fff
 
 //App
 
@@ -45,19 +57,26 @@ html
   to
    transform: rotate(0deg)
 
-@-webkit-keyframes launch
+@-webkit-keyframes starfall
   from
     transform: translateY(0px)
   to
     transform: translateY(-2000px)
 
+.spacer
+  height: 0
+
+
+  &.minimized
+    height: 300px
+
 header.header
   display: flex
   flex-direction: column
   height: 300px
-  background: radial-gradient(ellipse at top, #1B2735 0%, #090A0F 100%)
+  background: $azure
   //overflow: hidden
-  transition: all 1s ease;
+  transition: height .8s ease, background .8s ease
 
   &.minimized
     height: 38px
@@ -65,27 +84,32 @@ header.header
     left: 0;
     right: 0;
     flex-direction: row
+    background: rgba(27, 39, 53, .9)
 
     .header-top
       align-items: flex-end
       justify-content: flex-end
-      transition: all 1s ease
+
+    .clouds, .stars
+      height: 38px
+      overflow: hidden
 
   .header-top
     position: fixed
+    user-select: none
     left: 0
     right: 0
     display: flex
     align-items: center
     justify-content: center
-    color: #000
+    color: $black
     padding: 10px
     z-index: 5
     background: rgba(255,255,255,.7)
-    transition: background 1s ease;
+    transition: background .8s ease;
 
     .nav
-      transition: all 1s ease
+      transition: all .8s ease
       ul
         text-transform: uppercase
 
@@ -95,34 +119,46 @@ header.header
 
           a
             text-decoration: none
-            color: #000
+            color: $black
             font-size: 18px
 
+            &.active
+              color: $white
+
+              &:hover
+                text-shadow: none
+
             &:hover
-              color: #fff
+              text-shadow: $hover
 
   .title
     margin: auto
     text-align: center
-    color: #fff
+    color: $white
     z-index: 5
-    transition: color 1s ease
+    transition: color .8s ease-in
 
     h1
       font-size: 4em
       font-weight: 300
-      text-shadow: 0 0 30px rgba(0,0,0,0.7)
+      //text-shadow: 0 0 30px rgba(0,0,0,0.7)
+      letter-spacing: 5px
+      text-shadow: $glow
+      transition: color .8s ease-in
 
     h3
       font-size: 1.5em
       font-weight: 300
+      text-shadow: $glow
+      transition: color .8s ease-in
 
-  .clouds
+  .clouds, .stars
     overflow: hidden
     position: absolute
     left: 0
     right: 0
-    height: 295px
+    height: 300px
+    transition: height .8s ease
 
     .cloud
       pointer-events: none
@@ -134,7 +170,6 @@ header.header
         top: -50px
         height: 600px
         animation: rotate 200s linear infinite
-        //z-index: 5
 
       &:nth-of-type(2)
         left: 12%
@@ -142,36 +177,31 @@ header.header
         height: 600px
         animation: rotate 140s linear infinite
         opacity: .1
-        //z-index: 3
 
       &:nth-of-type(3)
         left: 14%
         top: -20px
         height: 500px
         animation: rotate 100s linear infinite
-        //z-index: 1
 
       &:nth-of-type(4)
         left: 50%
         top: 10px
         height: 600px
         animation: rotate 100s linear infinite
-        //z-index: 3
-
 
       &:nth-of-type(5)
         left: 80%
         top: -30px
         height: 650px
         animation: rotate 130s linear infinite
-        //z-index: 3
 
   .stars-small
     width: 1px
     height: 1px
     background: transparent
-    box-shadow: bigStars
-    animation: launch 150s linear infinite
+    box-shadow: $bigStars
+    animation: starfall 150s linear infinite
 
     &:after
       content: " "
@@ -180,14 +210,14 @@ header.header
       width: 1px
       height: 1px
       background: transparent
-      box-shadow: bigStars
+      box-shadow: $bigStars
 
   .stars-medium
     width: 2px
     height: 2px
     background: transparent
-    box-shadow: mediumStars
-    animation : launch 100s linear infinite
+    box-shadow:$mediumStars
+    animation : starfall 100s linear infinite
 
     &:after
       content: " "
@@ -196,14 +226,14 @@ header.header
       width: 2px
       height: 2px
       background: transparent
-      box-shadow: mediumStars
+      box-shadow:$mediumStars
 
   .stars-big
     width: 3px
     height: 3px
     background: transparent
-    animation: launch 50s linear infinite
-    box-shadow: smallStarts
+    animation: starfall 50s linear infinite
+    box-shadow: $smallStarts
 
     &:after
       content: " "
@@ -212,13 +242,13 @@ header.header
       width: 3px
       height: 3px
       background: transparent
-      box-shadow: smallStarts
+      box-shadow: $smallStarts
 
     &:after
       content: " "
       width: 3px
       height: 3px
-      background: #fff
+      background: $white
 
   .header-bottom
     display: flex
@@ -234,12 +264,12 @@ header.header
       width: 170px
       height: 170px
       border-radius: 100%
-      border: 3px solid #fff;
+      border: 3px solid $white;
       //transition: width .4s ease, height .4s ease
 
   &.minimized .title
-    margin-left: 100px
-    color: #000
+    margin-left: 110px
+    color: $black
     font-size: 0.3em
 
     h3
@@ -252,13 +282,66 @@ header.header
     img
       width: 75px
       height: 75px
-      border: 2px solid #fff;
+      border: 2px solid $white;
       margin-left: 25px
 
 
 .content
-  overflow: hidden
-  height: 2500px
+  display: flex
+  margin-top: 120px
+  flex-direction: column
+  height: 1300px //DEV
+  background: $white
+  transition: all .8s ease
+
+  header.content-header
+
+    .title
+      margin: auto
+      text-align: center
+      color: $black
+      z-index: 5
+      transition: color .8s ease
+
+      h1
+        font-size: 4em
+        font-weight: 300
+        letter-spacing: 5px
+
+      h3
+        margin-top: 20px
+        font-size: 1.5em
+        font-weight: 300
+        color: $dark
+
+  .reviews
+    padding: 0 10%
+    margin: 100px auto 100px auto
+
+    ul
+      display: flex
+      flex-direction: row
+      flex-wrap: wrap
+      justify-content: space-between
+      align-items: center
+
+
+    li
+      display: inline-block
+      border-right: 3px solid $gray
+      margin: 10px 20px
+      max-width: 450px
+
+      p
+        color: $dark
+
+        &:before
+          color: $gray
+          content: open-quote
+          font-size: 4em
+          line-height: 0.1em
+          margin-right: 0.1em
+          vertical-align: -0.4em
 
 
 
