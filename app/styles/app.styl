@@ -16,19 +16,20 @@ multipleBoxShadow(n)
 
 //stars
 
-// $bigStars    = multipleBoxShadow(700)
-// $mediumStars = multipleBoxShadow(200)
-// $smallStarts = multipleBoxShadow(100)
+$bigStars    = multipleBoxShadow(700)
+$mediumStars = multipleBoxShadow(200)
+$smallStarts = multipleBoxShadow(100)
 
 //Colors
 
-$white = #FFF
-$black = #000
-$dark  = #404040
-$gray  = #B8E0D4
-$azure = radial-gradient(ellipse at top, #1B2735 0%, #090A0F 100%)
-$glow  = 0 0px 15px rgba(59, 225, 255, .8)
-$hover =  0 0px 10px #fff
+$white  = #FFF
+$black  = #000
+$dark   = #404040
+$gray   = #B8E0D4
+$anchor = #c05b4d
+$azure  = radial-gradient(ellipse at top, #1B2735 0%, #090A0F 100%)
+$glow   = 0 0px 15px rgba(59, 225, 255, .8)
+$hover  =  0 0px 10px #fff
 
 //App
 
@@ -63,12 +64,18 @@ html
   to
     transform: translateY(-2000px)
 
+@-webkit-keyframes sideSpacer
+  from
+    height: 300px
+  to
+    height: 30px
+
 .spacer
   height: 0
 
-
   &.minimized
-    height: 300px
+    height: 30px
+    animation: sideSpacer .8s ease 1
 
 header.header
   display: flex
@@ -258,7 +265,7 @@ header.header
     left: 0
     right: 0
     transform: translateY(-50%)
-    z-index: 10
+    z-index: 5
 
     img
       width: 170px
@@ -278,6 +285,7 @@ header.header
   &.minimized .header-bottom
     transform: translateY(0%)
     justify-content: flex-start
+    width: 50%
 
     img
       width: 75px
@@ -315,7 +323,7 @@ header.header
         color: $dark
 
   .reviews
-    padding: 0 10%
+    padding: 0 14%
     margin: 100px auto 100px auto
 
     ul
@@ -329,8 +337,9 @@ header.header
     li
       display: inline-block
       border-right: 3px solid $gray
-      margin: 10px 20px
+      padding: 10px 20px
       max-width: 450px
+      margin: 10px
 
       p
         color: $dark
@@ -342,6 +351,16 @@ header.header
           line-height: 0.1em
           margin-right: 0.1em
           vertical-align: -0.4em
+
+      .reviewer
+        margin-top: 15px
+        float: right
+
+        strong
+          font-weight: 600
+
+        a
+          color: $anchor
 
 
 

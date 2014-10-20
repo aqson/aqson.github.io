@@ -64,36 +64,60 @@
     <header class="content-header">
       <div class="title">
         <h1>Web Consultant</h1>
-        <h3>...development, maintenance, analytics...</h3>
+        <h3>When work is hobby, results is undreamt-of prodigious.</h3>
       </div>
     </header>
     <div class="reviews">
       <ul>
         <li>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. </p>
+          <div class="reviewer">
+            <strong>Larry Page, </strong>CEO of <a href="http://google.com">Google Inc.</a>
+          </div>
         </li>
         <li>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+          <div class="reviewer">
+            <strong>Tim Cook, </strong>CEO of <a href="http://apple.com">Apple Inc.</a>
+          </div>
+        </li>
+        <li>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+          <div class="reviewer">
+            <strong>Mark Zuckerberg, </strong>CEO of <a href="http://facebook.com">Apple Inc.</a>
+          </div>
+        </li>
+        <li>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+          <div class="reviewer">
+            <strong>WhatsApp, </strong>CEO of <a href="http://watsapp.com">Jan Koum.</a>
+          </div>
         </li>
     </div>
   </div>
 </div>
 <script type="text/javascript">
   $(function(){
-    var prev = 0;
+    var prev = document.body.scrollTop;
+    var block = false;
+    var minimized = false;
     $('.header, .spacer').removeClass('minimized')
-    $(window).on('scroll', function (e) {
-      console.log(e)
+    $(window).on('mousewheel', function (e) {
+      console.log(event)
+      if (block) e.preventDefault()
       var pos = document.body.scrollTop
-      console.log(pos)
       var scrollDownChangePosition = 76;
-      var scrollUpChangePosition = 300;
-      if (pos >= scrollDownChangePosition) {
-        console.log('!')
+      var scrollUpChangePosition = 150;
+      //scrollDown
+      if (prev < pos && pos > scrollDownChangePosition && !minimized) {
         $('.header, .spacer').addClass('minimized')
-      } else if (pos < scrollUpChangePosition) {
-        console.log('!!')
+        minimized = true
+        block = true
+        setTimeout(function(){block = false}, 800);
+      //ScrollUp
+      } else if (prev > pos && pos < scrollUpChangePosition && minimized) {
         $('.header, .spacer').removeClass('minimized')
+        minimized = false
       }
       prev = pos
     })
