@@ -1,0 +1,127 @@
+<!-- <!doctype html>
+<html class="no-js" lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="apple-mobile-web-app-title" content="Yavorsky">
+  <title>Yavorsky</title>
+  <link rel="stylesheet" href="/stylesheets/app.css">
+  <script src="/javascripts/vendor.js"></script>
+  <script src="/javascripts/app.js"></script>
+  <script>require('initialize');</script>
+</head>
+<body>
+</body>
+</html>
+ -->
+<!doctype html>
+<html class="no-js" lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="apple-mobile-web-app-title" content="Yavorsky">
+  <title>Yavorsky</title>
+
+  <style>
+    @import url(http://fonts.googleapis.com/css?family=Muli:300,400,300italic,400italic|Raleway:400,100,200,300,500,600,700,800,900);
+  </style>
+  <script src="/javascripts/vendor.js"></script>
+  <link rel="stylesheet" href="/stylesheets/app.css">
+</head>
+<body>
+<div class="app">
+  <header class="header minimized">
+    <div class="header-top">
+      <nav class="nav">
+        <ul>
+          <li><a class="active" href="#">About</a></li>
+          <li><a href="#">Blog</a></li>
+          <li><a href="#">Contact</a></li>
+          <li><a href="#">Follow</a></li>
+        </ul>
+      </nav>
+    </div>
+    <div class="stars">
+      <div class="stars-big"></div>
+      <div class="stars-medium"></div>
+      <div class="stars-small"></div>
+    </div>
+    <div class="clouds">
+      <img class="cloud" src="/img/cloud.png"></img>
+      <img class="cloud" src="/img/cloud.png"></img>
+      <img class="cloud" src="/img/cloud.png"></img>
+      <img class="cloud" src="/img/cloud.png"></img>
+      <img class="cloud" src="/img/cloud.png"></img>
+    </div>
+    <div class="title">
+      <h3>Artem</h3>
+      <h1>-Yavorsky-</h1>
+    </div>
+    <div class="header-bottom"><img class="avatar" src="/img/avatar.png"/></div>
+  </header>
+  <div class="spacer minimized"></div>
+  <div class="content">
+    <header class="content-header">
+      <div class="title">
+        <h1>Web Consultant</h1>
+        <h3>When work is hobby, results is undreamt-of prodigious.</h3>
+      </div>
+    </header>
+    <div class="reviews">
+      <ul>
+        <li>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. </p>
+          <div class="reviewer">
+            <strong>Larry Page, </strong>CEO of <a href="http://google.com">Google Inc.</a>
+          </div>
+        </li>
+        <li>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+          <div class="reviewer">
+            <strong>Tim Cook, </strong>CEO of <a href="http://apple.com">Apple Inc.</a>
+          </div>
+        </li>
+        <li>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+          <div class="reviewer">
+            <strong>Mark Zuckerberg, </strong>CEO of <a href="http://facebook.com">Apple Inc.</a>
+          </div>
+        </li>
+        <li>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+          <div class="reviewer">
+            <strong>WhatsApp, </strong>CEO of <a href="http://watsapp.com">Jan Koum.</a>
+          </div>
+        </li>
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+  $(function(){
+    var prev = document.body.scrollTop;
+    var block = false;
+    var minimized = false;
+    $('.header, .spacer').removeClass('minimized')
+    $(window).on('mousewheel', function (e) {
+      console.log(event)
+      if (block) e.preventDefault()
+      var pos = document.body.scrollTop
+      var scrollDownChangePosition = 76;
+      var scrollUpChangePosition = 150;
+      //scrollDown
+      if (prev < pos && pos > scrollDownChangePosition && !minimized) {
+        $('.header, .spacer').addClass('minimized')
+        minimized = true
+        block = true
+        setTimeout(function(){block = false}, 800);
+      //ScrollUp
+      } else if (prev > pos && pos < scrollUpChangePosition && minimized) {
+        $('.header, .spacer').removeClass('minimized')
+        minimized = false
+      }
+      prev = pos
+    })
+  })
+</script>
+</body>
+</html>
