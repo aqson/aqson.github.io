@@ -8,7 +8,7 @@
     "url": ""
   },
   "scripts": {
-    "start": "brunch watch --server",
+    "start": "node index.js",
     "test": "brunch test"
   },
   "dependencies": {
@@ -23,6 +23,10 @@
     "react-coffee-brunch": "shreeve/react-coffee-brunch",
     "stylus-brunch": ">= 1.0 < 1.8",
     "sass-brunch": ">= 1.0 < 1.8",
-    "uglify-js-brunch": ">= 1.0 < 1.8"
+    "uglify-js-brunch": ">= 1.0 < 1.8",
+    "express": "~4.9.x"
+  },
+  "engines": {
+    "node": "0.10.x"
   }
 }
