@@ -4,7 +4,7 @@ Reviews = require './Reviews'
 
 App = React.createClass
   render: ->
-    div className: 'about',
-      Reviews()
+    div className: 'posts',
+      123123123
 
 module.exports = App

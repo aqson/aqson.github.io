@@ -1,20 +1,38 @@
 {nav_items} = require 'config'
 {Link} = ReactRouter
 
-{div, nav, ul, li, h1, h3}  = require 'lib/dom-helpers'
+{div, header, nav, ul, li, h1, h3, img}  = require 'lib/dom-helpers'
 
 Header = React.createClass
+
   render: ->
     navItems = nav_items.map (item) ->
       li null,
-        Link to: item.path, item.name
+        Link to: item.to, item.name
 
-    div className: 'header',
-      div className: 'title',
-        h1 Link to: 'app', 'ɣλ'
-        #h3 'aqson'
-      nav null,
-        ul null,
-          navItems
+    header className: "header #{if @props.minimized then 'minimized' else ''}",
+      div className: "header-top",
+        nav className: "nav",
+          ul null,
+            navItems
+
+      div className: "stars",
+        div className: "stars-big"
+        div className: "stars-medium"
+        div className: "stars-small"
+
+      div className: "clouds",
+        img className: "cloud", src:"/img/cloud.png"
+        img className: "cloud", src:"/img/cloud.png"
+        img className: "cloud", src:"/img/cloud.png"
+        img className: "cloud", src:"/img/cloud.png"
+        img className: "cloud", src:"/img/cloud.png"
+
+      div className: "title",
+        h3 'Artem'
+        h1 'Yavorsky'
+
+      div className: "header-bottom",
+        img className: "avatar", src:"/img/avatar.png"
 
 module.exports = Header

@@ -1,14 +1,18 @@
 {nav_items} = require 'config'
 
-{Routes, Route, DefaultRoute} = ReactRouter
+{Route, DefaultRoute} = ReactRouter
 
-routes = nav_items.map (item) ->
-  Route name: item.path, path: item.path, handler: require(item.handler)
+mount = (name) -> require "./#{name}"
+
 first = nav_items[0]
 
-
 module.exports =
-  Routes location: 'history',
-    Route name: 'app', path: '/', handler: require('./App'),
-      routes
-      DefaultRoute handler: require(first.handler)
+  Route path: '/', handler: mount('App'),
+    Route name: 'about',   handler: mount('About')
+    Route name: 'posts',   handler: mount('Posts')
+    #Route name: 'contact', handler: mount('Contact')
+
+    # nav_items.map (item) ->
+    #   {path, handler} = item
+    #   Route name: path, path: path, handler: mount(handler)
+    #DefaultRoute handler: mount(first.handler)

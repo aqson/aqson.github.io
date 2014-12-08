@@ -1,4 +1,5 @@
 Routes = require 'Routes'
 
-jQuery ->
-  React.renderComponent(Routes, document.body)
+$ ->
+  ReactRouter.run Routes, ReactRouter.HistoryLocation, (Handler) ->
+    React.render React.createElement(Handler, null), document.body

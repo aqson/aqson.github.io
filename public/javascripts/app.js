@@ -91,17 +91,45 @@
   globals.require.brunch = true;
 })();
 require.register("About", function(exports, require, module) {
-var About, Reviews, div;
+var About, Header, Reviews, a, div, h1, h3, header, li, p, span, strong, ul, _ref;
 
 Reviews = require('./Reviews');
 
-div = require('lib/dom-helpers').div;
+Header = require('./Header');
+
+_ref = require('lib/dom-helpers'), div = _ref.div, header = _ref.header, h1 = _ref.h1, h3 = _ref.h3, p = _ref.p, strong = _ref.strong, span = _ref.span, a = _ref.a, ul = _ref.ul, li = _ref.li;
 
 About = React.createClass({
   render: function() {
-    return div({
+    return div(null, div({
+      className: 'spacer minimized'
+    }), div({
       className: 'about'
-    }, Reviews());
+    }, div({
+      className: 'content'
+    }, header({
+      className: 'content-header'
+    }, div({
+      className: 'title'
+    }, h1('Web Consultant'), h3("There's no crying in web development! I'll take care of it!"))), div({
+      className: 'reviews'
+    }, ul(null, li(null, p('Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'), div({
+      className: "reviewer"
+    }, strong('Larry Page,'), span('CEO of '), a({
+      href: 'http://google.com'
+    }, 'Google Inc'))), li(null, p('Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'), div({
+      className: "reviewer"
+    }, strong('Larry Page,'), span('CEO of '), a({
+      href: 'http://google.com'
+    }, 'Google Inc'))), li(null, p('Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'), div({
+      className: "reviewer"
+    }, strong('Larry Page,'), span('CEO of '), a({
+      href: 'http://google.com'
+    }, 'Google Inc'))), li(null, p('Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'), div({
+      className: "reviewer"
+    }, strong('Larry Page,'), span('CEO of '), a({
+      href: 'http://google.com'
+    }, 'Google Inc'))))))));
   }
 });
 
@@ -109,35 +137,71 @@ module.exports = About;
 });
 
 ;require.register("App", function(exports, require, module) {
-var App, Header, div;
+var App, Header, Link, RouteHandler, State, block, config, div, downPosition, header, li, previous, upPosition, _ref, _ref1;
 
 Header = require('./Header');
 
-div = require('lib/dom-helpers').div;
+RouteHandler = ReactRouter.RouteHandler, Link = ReactRouter.Link, State = ReactRouter.State;
+
+config = require('config');
+
+previous = null;
+
+block = false;
+
+_ref = [76, 150], downPosition = _ref[0], upPosition = _ref[1];
+
+_ref1 = require('lib/dom-helpers'), div = _ref1.div, header = _ref1.header, li = _ref1.li;
 
 App = React.createClass({
+  mixins: [State],
+  getInitialState: function() {
+    return {
+      minimized: false
+    };
+  },
+  componentWillMount: function() {
+    return previous = document.body.scrollTop;
+  },
+  wheel: function(event) {
+    var position,
+      _this = this;
+    if (block) {
+      event.preventDefault();
+    }
+    position = document.body.scrollTop;
+    if (previous < position && position > downPosition && !this.state.minimized) {
+      block = true;
+      setTimeout((function() {
+        return block = false;
+      }), 800);
+      this.setState({
+        minimized: true
+      });
+    } else if (previous > position && position < upPosition && this.state.minimized) {
+      this.setState({
+        minimized: false
+      });
+    }
+    return previous = position;
+  },
   render: function() {
+    var check, minimized,
+      _this = this;
+    check = function(event) {
+      if (_this.isActive('about')) {
+        return _this.wheel(event);
+      }
+    };
+    minimized = this.isActive('about') ? this.state.minimized : true;
     return div({
-      className: 'app'
-    }, Header(), this.props.activeRouteHandler());
-  }
-});
-
-module.exports = App;
-});
-
-;require.register("Blog", function(exports, require, module) {
-var App, Reviews, div;
-
-Reviews = require('./Reviews');
-
-div = require('lib/dom-helpers').div;
-
-App = React.createClass({
-  render: function() {
-    return div({
-      className: 'about'
-    }, Reviews());
+      className: 'app',
+      onWheel: check
+    }, Header({
+      minimized: minimized
+    }), div({
+      className: "spacer " + (minimized ? 'minimized' : '')
+    }), RouteHandler());
   }
 });
 
@@ -163,33 +227,83 @@ module.exports = Footer;
 });
 
 ;require.register("Header", function(exports, require, module) {
-var Header, Link, div, h1, h3, li, nav, nav_items, ul, _ref;
+var Header, Link, div, h1, h3, header, img, li, nav, nav_items, ul, _ref;
 
 nav_items = require('config').nav_items;
 
 Link = ReactRouter.Link;
 
-_ref = require('lib/dom-helpers'), div = _ref.div, nav = _ref.nav, ul = _ref.ul, li = _ref.li, h1 = _ref.h1, h3 = _ref.h3;
+_ref = require('lib/dom-helpers'), div = _ref.div, header = _ref.header, nav = _ref.nav, ul = _ref.ul, li = _ref.li, h1 = _ref.h1, h3 = _ref.h3, img = _ref.img;
 
 Header = React.createClass({
   render: function() {
     var navItems;
     navItems = nav_items.map(function(item) {
       return li(null, Link({
-        to: item.path
+        to: item.to
       }, item.name));
     });
-    return div({
-      className: 'header'
+    return header({
+      className: "header " + (this.props.minimized ? 'minimized' : '')
     }, div({
-      className: 'title'
-    }, h1(Link({
-      to: 'app'
-    }, 'ɣλ'))), nav(null, ul(null, navItems)));
+      className: "header-top"
+    }, nav({
+      className: "nav"
+    }, ul(null, navItems))), div({
+      className: "stars"
+    }, div({
+      className: "stars-big"
+    }), div({
+      className: "stars-medium"
+    }), div({
+      className: "stars-small"
+    })), div({
+      className: "clouds"
+    }, img({
+      className: "cloud",
+      src: "/img/cloud.png"
+    }), img({
+      className: "cloud",
+      src: "/img/cloud.png"
+    }), img({
+      className: "cloud",
+      src: "/img/cloud.png"
+    }), img({
+      className: "cloud",
+      src: "/img/cloud.png"
+    }), img({
+      className: "cloud",
+      src: "/img/cloud.png"
+    })), div({
+      className: "title"
+    }, h3('Artem'), h1('Yavorsky')), div({
+      className: "header-bottom"
+    }, img({
+      className: "avatar",
+      src: "/img/avatar.png"
+    })));
   }
 });
 
 module.exports = Header;
+});
+
+;require.register("Posts", function(exports, require, module) {
+var App, Reviews, div;
+
+Reviews = require('./Reviews');
+
+div = require('lib/dom-helpers').div;
+
+App = React.createClass({
+  render: function() {
+    return div({
+      className: 'posts'
+    }, 123123123);
+  }
+});
+
+module.exports = App;
 });
 
 ;require.register("Reviews", function(exports, require, module) {
@@ -225,31 +339,28 @@ module.exports = Reviews;
 });
 
 ;require.register("Routes", function(exports, require, module) {
-var DefaultRoute, Route, Routes, first, nav_items, routes;
+var DefaultRoute, Route, first, mount, nav_items;
 
 nav_items = require('config').nav_items;
 
-Routes = ReactRouter.Routes, Route = ReactRouter.Route, DefaultRoute = ReactRouter.DefaultRoute;
+Route = ReactRouter.Route, DefaultRoute = ReactRouter.DefaultRoute;
 
-routes = nav_items.map(function(item) {
-  return Route({
-    name: item.path,
-    path: item.path,
-    handler: require(item.handler)
-  });
-});
+mount = function(name) {
+  return require("./" + name);
+};
 
 first = nav_items[0];
 
-module.exports = Routes({
-  location: 'history'
-}, Route({
-  name: 'app',
+module.exports = Route({
   path: '/',
-  handler: require('./App')
-}, routes, DefaultRoute({
-  handler: require(first.handler)
-})));
+  handler: mount('App')
+}, Route({
+  name: 'about',
+  handler: mount('About')
+}), Route({
+  name: 'posts',
+  handler: mount('Posts')
+}));
 });
 
 ;require.register("Works", function(exports, require, module) {
@@ -277,21 +388,11 @@ config = {};
 
 config.nav_items = [
   {
-    path: 'about',
-    name: 'about',
-    handler: './About'
+    to: 'about',
+    name: 'About'
   }, {
-    path: 'works',
-    name: 'works',
-    handler: './Works'
-  }, {
-    path: 'blog',
-    name: 'blog',
-    handler: './Blog'
-  }, {
-    path: 'contact',
-    name: 'contact',
-    handler: './Blog'
+    to: 'posts',
+    name: 'Posts'
   }
 ];
 
@@ -315,8 +416,10 @@ var Routes;
 
 Routes = require('Routes');
 
-jQuery(function() {
-  return React.renderComponent(Routes, document.body);
+$(function() {
+  return ReactRouter.run(Routes, ReactRouter.HistoryLocation, function(Handler) {
+    return React.render(React.createElement(Handler, null), document.body);
+  });
 });
 });
 

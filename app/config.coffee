@@ -1,10 +1,9 @@
 config = {}
 
 config.nav_items = [
-  {path: 'about', name: 'about', handler: './About'}
-  {path: 'works', name: 'works', handler: './Works'}
-  {path: 'blog', name: 'blog', handler: './Blog'}
-  {path: 'contact', name: 'contact', handler: './Blog'}
+  {to: 'about', name: 'About'}
+  {to: 'posts', name: 'Posts'}
+#  {to: 'contact', name: 'contact', handler: 'Contact'}
 #  {path: 'blog', name: 'Blog', handler: './Blog'}
 #  {path: 'works', name: 'Works', handler: './Works'}
 #  {path: 'contact', name: 'Contact', handler: './Contact'}
