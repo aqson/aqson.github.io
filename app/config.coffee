@@ -1,12 +1,20 @@
 config = {}
 
+config.me = {
+  first_name: "Artem"
+  last_name: "Yavorsky"
+  img_url: "/img/avatar.png"
+  twitter: "http://twitter.com/aqson"
+  github: "http://github.com/yavorsky"
+  facebook: "http://facebook.com/aqson"
+  email: "info@yavorsky.org"
+}
+
 config.nav_items = [
   {to: 'about', name: 'About'}
   {to: 'posts', name: 'Posts'}
-#  {to: 'contact', name: 'contact', handler: 'Contact'}
-#  {path: 'blog', name: 'Blog', handler: './Blog'}
-#  {path: 'works', name: 'Works', handler: './Works'}
-#  {path: 'contact', name: 'Contact', handler: './Contact'}
+  {to: config.me.github, name: 'Github', external: true}
+  {to: 'contact', name: 'Contact'}
 ]
 
 config.reviews = [
@@ -15,22 +23,21 @@ config.reviews = [
 
 config.blog =
   sections: [
-    {
-      name: 'liberty'
-      title: 'Liberty'
-      posts: [
-        {name: 'first_post', title: 'First post', date: "2015-02-03T16:15:00.000Z"}
-        {name: 'second_post', title: 'Second post', date: "2015-02-13T16:15:00.000Z"}
-      ]
-    },
-    {
-      name: 'tech'
-      title: 'Tech'
-      posts: [
-        {url: 'http://paulmillr.com/posts/usa-presidents-history/', title: 'External post', external: true, date: "2015-02-13T16:15:00.000Z"}
-        {name: 'second_post', title: 'Second post', date: "2015-02-13T16:15:00.000Z"}
-      ]
-    }
+    # {
+    #   name: 'liberty'
+    #   title: 'Liberty'
+    #   posts: [
+    #     {name: 'first_post', title: 'First post Test one two trhee', date: "2015-02-03T16:15:00.000Z"}
+    #   ]
+    # },
+    # {
+    #   name: 'law'
+    #   title: 'Law'
+    #   posts: [
+    #     {name: 'first_post', title: 'Law Law Law', date: "2015-02-03T16:15:00.000Z"}
+    #   ]
+    # }
+
   ]
 
 

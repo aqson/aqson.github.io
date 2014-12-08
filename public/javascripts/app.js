@@ -109,25 +109,7 @@ About = React.createClass({
       className: 'content-header'
     }, div({
       className: 'title'
-    }, h1('Web Consultant'), h3("There's no crying in web development! I'll take care of it!"))), div({
-      className: 'reviews'
-    }, ul(null, li(null, p('Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'), div({
-      className: "reviewer"
-    }, strong('Larry Page,'), span('CEO of '), a({
-      href: 'http://google.com'
-    }, 'Google Inc'))), li(null, p('Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'), div({
-      className: "reviewer"
-    }, strong('Larry Page,'), span('CEO of '), a({
-      href: 'http://google.com'
-    }, 'Google Inc'))), li(null, p('Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'), div({
-      className: "reviewer"
-    }, strong('Larry Page,'), span('CEO of '), a({
-      href: 'http://google.com'
-    }, 'Google Inc'))), li(null, p('Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'), div({
-      className: "reviewer"
-    }, strong('Larry Page,'), span('CEO of '), a({
-      href: 'http://google.com'
-    }, 'Google Inc'))))))));
+    }, h1('Web Consultant'), h3("There's no crying in web development! I'll take care of it!"))))));
   }
 });
 
@@ -206,6 +188,30 @@ App = React.createClass({
 module.exports = App;
 });
 
+;require.register("Contact", function(exports, require, module) {
+var Reviews, a, div, h1, li, me, ul, _ref;
+
+me = require('config').me;
+
+_ref = require('lib/dom-helpers'), div = _ref.div, ul = _ref.ul, li = _ref.li, a = _ref.a, h1 = _ref.h1;
+
+Reviews = React.createClass({
+  render: function() {
+    return div({
+      className: 'contact content'
+    }, h1('Contact me: '), ul(null, li(null, a({
+      href: "mailto:" + me.email
+    }, "" + me.email)), li(null, a({
+      href: me.twitter
+    }, "Twitter/aqson")), li(null, a({
+      href: me.facebook
+    }, 'Facebook/aqson'))));
+  }
+});
+
+module.exports = Reviews;
+});
+
 ;require.register("Footer", function(exports, require, module) {
 var Footer, Link, div;
 
@@ -225,20 +231,25 @@ module.exports = Footer;
 });
 
 ;require.register("Header", function(exports, require, module) {
-var Header, Link, div, h1, h3, header, img, li, nav, nav_items, ul, _ref;
+var Header, Link, a, config, div, h1, h3, header, img, li, me, nav, ul, _ref;
 
-nav_items = require('config').nav_items;
+config = require('config');
+
+me = config.me;
 
 Link = ReactRouter.Link;
 
-_ref = require('lib/dom-helpers'), div = _ref.div, header = _ref.header, nav = _ref.nav, ul = _ref.ul, li = _ref.li, h1 = _ref.h1, h3 = _ref.h3, img = _ref.img;
+_ref = require('lib/dom-helpers'), div = _ref.div, header = _ref.header, nav = _ref.nav, ul = _ref.ul, li = _ref.li, a = _ref.a, h1 = _ref.h1, h3 = _ref.h3, img = _ref.img;
 
 Header = React.createClass({
   render: function() {
     var navItems;
-    navItems = nav_items.map(function(item) {
-      return li(null, Link({
+    navItems = config.nav_items.map(function(item) {
+      return li(null, !item.external ? Link({
         to: item.to
+      }, item.name) : a({
+        href: item.to,
+        target: '_blank'
       }, item.name));
     });
     return header({
@@ -274,11 +285,11 @@ Header = React.createClass({
       src: "/img/cloud.png"
     })), div({
       className: "title"
-    }, h3('Artie'), h1('Yavorsky')), div({
+    }, h3(me.first_name), h1(me.last_name)), div({
       className: "header-bottom"
     }, img({
       className: "avatar",
-      src: "/img/avatar.png"
+      src: me.img_url
     })));
   }
 });
@@ -296,10 +307,10 @@ _ref = require('lib/dom-helpers'), div = _ref.div, h1 = _ref.h1;
 Post = React.createClass({
   mixins: [State],
   getInitialState: function() {
-    var name;
-    name = this.getParams().name;
+    var name, section, _ref1;
+    _ref1 = this.getParams(), section = _ref1.section, name = _ref1.name;
     return {
-      post: require("posts/" + name)
+      post: require("posts/" + section + "/" + name)
     };
   },
   render: function() {
@@ -317,13 +328,13 @@ module.exports = Post;
 });
 
 ;require.register("Posts", function(exports, require, module) {
-var Link, Posts, Reviews, a, blog, div, format, h1, li, span, ul, _ref;
+var Link, Posts, Reviews, a, blog, div, format, h3, li, span, ul, _ref;
 
 Reviews = require('./Reviews');
 
 blog = require('config').blog;
 
-_ref = require('lib/dom-helpers'), div = _ref.div, h1 = _ref.h1, ul = _ref.ul, li = _ref.li, a = _ref.a, span = _ref.span;
+_ref = require('lib/dom-helpers'), div = _ref.div, h3 = _ref.h3, ul = _ref.ul, li = _ref.li, a = _ref.a, span = _ref.span;
 
 Link = ReactRouter.Link;
 
@@ -342,10 +353,11 @@ Posts = React.createClass({
           className: 'blog-post'
         }, span({
           className: 'blog-post-date'
-        }, format(post.date)), !post.external ? Link({
+        }, format(post.date)), " ", !post.external ? Link({
           to: 'post',
           params: {
-            name: "" + section.name + "/" + post.name
+            section: section.name,
+            name: post.name
           }
         }, post.title) : a({
           href: post.url
@@ -354,7 +366,7 @@ Posts = React.createClass({
     });
     return div({
       className: 'posts content'
-    }, sections);
+    }, sections.length ? sections : h3('No posts yet...'));
   }
 });
 
@@ -414,11 +426,15 @@ module.exports = Route({
   handler: mount('About')
 }), Route({
   name: 'posts',
-  handler: mount('Posts')
+  handler: mount('Posts'),
+  path: 'posts'
 }), Route({
   name: 'post',
   handler: mount('Post'),
-  path: 'post/:name'
+  path: 'posts/:section/:name'
+}), Route({
+  name: 'contact',
+  handler: mount('Contact')
 }));
 });
 
@@ -445,6 +461,16 @@ var config;
 
 config = {};
 
+config.me = {
+  first_name: "Artem",
+  last_name: "Yavorsky",
+  img_url: "/img/avatar.png",
+  twitter: "http://twitter.com/aqson",
+  github: "http://github.com/yavorsky",
+  facebook: "http://facebook.com/aqson",
+  email: "info@yavorsky.org"
+};
+
 config.nav_items = [
   {
     to: 'about',
@@ -452,6 +478,13 @@ config.nav_items = [
   }, {
     to: 'posts',
     name: 'Posts'
+  }, {
+    to: config.me.github,
+    name: 'Github',
+    external: true
+  }, {
+    to: 'contact',
+    name: 'Contact'
   }
 ];
 
@@ -466,38 +499,7 @@ config.reviews = [
 ];
 
 config.blog = {
-  sections: [
-    {
-      name: 'liberty',
-      title: 'Liberty',
-      posts: [
-        {
-          name: 'first_post',
-          title: 'First post',
-          date: "2015-02-03T16:15:00.000Z"
-        }, {
-          name: 'second_post',
-          title: 'Second post',
-          date: "2015-02-13T16:15:00.000Z"
-        }
-      ]
-    }, {
-      name: 'tech',
-      title: 'Tech',
-      posts: [
-        {
-          url: 'http://paulmillr.com/posts/usa-presidents-history/',
-          title: 'External post',
-          external: true,
-          date: "2015-02-13T16:15:00.000Z"
-        }, {
-          name: 'second_post',
-          title: 'Second post',
-          date: "2015-02-13T16:15:00.000Z"
-        }
-      ]
-    }
-  ]
+  sections: []
 };
 
 config.v = 0.1;
@@ -550,8 +552,8 @@ exports['iconed'] = function(icon, content) {
 };
 });
 
-;require.register("posts/first_post", function(exports, require, module) {
-var __templateData = "<h1 id=\"hello-\">hello!</h1>\n<h2 id=\"how-are-you-\">How are you?</h2>\n<p><a href=\"http://google.com\">link</a></p>\n";
+;require.register("posts/law/first_post", function(exports, require, module) {
+var __templateData = "<h1 id=\"111\">111</h1>\n<h1 id=\"sdasd\">sdasd</h1>\n<p>asd\nasdasd\nasdas</p>\n";
 if (typeof define === 'function' && define.amd) {
   define([], function() {
     return __templateData;
@@ -563,8 +565,8 @@ if (typeof define === 'function' && define.amd) {
 }
 });
 
-;require.register("posts/second_post", function(exports, require, module) {
-var __templateData = "<h1 id=\"hello-\">hello!</h1>\n<h2 id=\"how-are-you-\">How are you?</h2>\n<p><a href=\"http://google.com\">link</a></p>\n";
+;require.register("posts/liberty/first_post", function(exports, require, module) {
+var __templateData = "<h1 id=\"111\">111</h1>\n<h1 id=\"111\">111</h1>\n<h1 id=\"111\">111</h1>\n<h1 id=\"111\">111</h1>\n<h1 id=\"111\">111</h1>\n<h1 id=\"111\">111</h1>\n<h1 id=\"111\">111</h1>\n<h1 id=\"111\">111</h1>\n<h1 id=\"111\">111</h1>\n";
 if (typeof define === 'function' && define.amd) {
   define([], function() {
     return __templateData;

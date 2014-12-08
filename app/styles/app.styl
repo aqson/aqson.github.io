@@ -1,3 +1,5 @@
+@import 'variables'
+
 //starfall helpers
 
 global-reset()
@@ -14,26 +16,11 @@ multipleBoxShadow(n)
     value = value, random(0, 2000) random(0, 2000) #fff1df
   return value
 
-//stars
+//Stars
 
-// $bigStars    = multipleBoxShadow(700)
-// $mediumStars = multipleBoxShadow(200)
-// $smallStarts = multipleBoxShadow(100)
-
-$bigStars    = 1
-$mediumStars = 1
-$smallStarts = 1
-
-//Colors
-
-$white  = #FFF
-$black  = #000
-$dark   = #404040
-$gray   = #B8E0D4
-$anchor = #c05b4d
-$azure  = radial-gradient(ellipse at top, #1B2735 0%, #090A0F 100%)
-$glow   = 0 0px 15px rgba(59, 225, 255, .8)
-$hover  =  0 0px 10px #fff
+$bigStars    = multipleBoxShadow(700)
+$mediumStars = multipleBoxShadow(200)
+$smallStarts = multipleBoxShadow(100)
 
 //App
 
@@ -73,6 +60,13 @@ html
     height: 300px
   to
     height: 30px
+
+a
+  color: $anchor
+  text-decoration: none
+
+  &:hover
+    text-decoration: underline
 
 .spacer
   height: 0

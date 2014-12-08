@@ -1,6 +1,6 @@
 Reviews = require './Reviews'
 {blog} = require 'config'
-{div, h1, ul, li, a, span} = require 'lib/dom-helpers'
+{div, h3, ul, li, a, span} = require 'lib/dom-helpers'
 {Link} = ReactRouter
 
 format = (date) -> moment(date).format('D MMM, YYYY')
@@ -15,11 +15,17 @@ Posts = React.createClass
           section.posts.map (post) ->
             li className: 'blog-post',
               span className: 'blog-post-date', format post.date
+              " "
               unless post.external
-                Link to: 'post', params: name: "#{section.name}/#{post.name}", post.title
+                Link to: 'post', params: section: section.name, name: post.name, post.title
               else
                 a href: post.url, post.title
 
-    div className: 'posts content', sections
+
+    div className: 'posts content',
+      if sections.length
+        sections
+      else
+        h3 'No posts yet...'
 
 module.exports = Posts

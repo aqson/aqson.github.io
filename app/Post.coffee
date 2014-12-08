@@ -4,8 +4,8 @@
 Post = React.createClass
   mixins: [State]
   getInitialState: ->
-    {name} = @getParams()
-    post: require "posts/#{name}"
+    {section, name} = @getParams()
+    post: require "posts/#{section}/#{name}"
 
   render: ->
     div className: 'post content',
