@@ -104,10 +104,8 @@ About = React.createClass({
     return div(null, div({
       className: 'spacer minimized'
     }), div({
-      className: 'about'
-    }, div({
-      className: 'content'
-    }, header({
+      className: 'about content'
+    }, div(null, header({
       className: 'content-header'
     }, div({
       className: 'title'
@@ -276,7 +274,7 @@ Header = React.createClass({
       src: "/img/cloud.png"
     })), div({
       className: "title"
-    }, h3('Artem'), h1('Yavorsky')), div({
+    }, h3('Artie'), h1('Yavorsky')), div({
       className: "header-bottom"
     }, img({
       className: "avatar",
@@ -288,22 +286,79 @@ Header = React.createClass({
 module.exports = Header;
 });
 
-;require.register("Posts", function(exports, require, module) {
-var App, Reviews, div;
+;require.register("Post", function(exports, require, module) {
+var Post, State, div, h1, _ref;
 
-Reviews = require('./Reviews');
+State = ReactRouter.State;
 
-div = require('lib/dom-helpers').div;
+_ref = require('lib/dom-helpers'), div = _ref.div, h1 = _ref.h1;
 
-App = React.createClass({
+Post = React.createClass({
+  mixins: [State],
+  getInitialState: function() {
+    var name;
+    name = this.getParams().name;
+    return {
+      post: require("posts/" + name)
+    };
+  },
   render: function() {
     return div({
-      className: 'posts'
-    }, 123123123);
+      className: 'post content'
+    }, div({
+      dangerouslySetInnerHTML: {
+        __html: this.state.post
+      }
+    }));
   }
 });
 
-module.exports = App;
+module.exports = Post;
+});
+
+;require.register("Posts", function(exports, require, module) {
+var Link, Posts, Reviews, a, blog, div, format, h1, li, span, ul, _ref;
+
+Reviews = require('./Reviews');
+
+blog = require('config').blog;
+
+_ref = require('lib/dom-helpers'), div = _ref.div, h1 = _ref.h1, ul = _ref.ul, li = _ref.li, a = _ref.a, span = _ref.span;
+
+Link = ReactRouter.Link;
+
+format = function(date) {
+  return moment(date).format('D MMM, YYYY');
+};
+
+Posts = React.createClass({
+  render: function() {
+    var sections;
+    sections = blog.sections.map(function(section) {
+      return div({
+        className: 'blog-section'
+      }, h1(section.title), ul(null, section.posts.map(function(post) {
+        return li({
+          className: 'blog-post'
+        }, span({
+          className: 'blog-post-date'
+        }, format(post.date)), !post.external ? Link({
+          to: 'post',
+          params: {
+            name: "" + section.name + "/" + post.name
+          }
+        }, post.title) : a({
+          href: post.url
+        }, post.title));
+      })));
+    });
+    return div({
+      className: 'posts content'
+    }, sections);
+  }
+});
+
+module.exports = Posts;
 });
 
 ;require.register("Reviews", function(exports, require, module) {
@@ -360,6 +415,10 @@ module.exports = Route({
 }), Route({
   name: 'posts',
   handler: mount('Posts')
+}), Route({
+  name: 'post',
+  handler: mount('Post'),
+  path: 'post/:name'
 }));
 });
 
@@ -405,6 +464,41 @@ config.reviews = [
     }
   }
 ];
+
+config.blog = {
+  sections: [
+    {
+      name: 'liberty',
+      title: 'Liberty',
+      posts: [
+        {
+          name: 'first_post',
+          title: 'First post',
+          date: "2015-02-03T16:15:00.000Z"
+        }, {
+          name: 'second_post',
+          title: 'Second post',
+          date: "2015-02-13T16:15:00.000Z"
+        }
+      ]
+    }, {
+      name: 'tech',
+      title: 'Tech',
+      posts: [
+        {
+          url: 'http://paulmillr.com/posts/usa-presidents-history/',
+          title: 'External post',
+          external: true,
+          date: "2015-02-13T16:15:00.000Z"
+        }, {
+          name: 'second_post',
+          title: 'Second post',
+          date: "2015-02-13T16:15:00.000Z"
+        }
+      ]
+    }
+  ]
+};
 
 config.v = 0.1;
 
@@ -454,6 +548,32 @@ exports['icon'] = function(icon) {
 exports['iconed'] = function(icon, content) {
   return [exports['icon'](icon), content];
 };
+});
+
+;require.register("posts/first_post", function(exports, require, module) {
+var __templateData = "<h1 id=\"hello-\">hello!</h1>\n<h2 id=\"how-are-you-\">How are you?</h2>\n<p><a href=\"http://google.com\">link</a></p>\n";
+if (typeof define === 'function' && define.amd) {
+  define([], function() {
+    return __templateData;
+  });
+} else if (typeof module === 'object' && module && module.exports) {
+  module.exports = __templateData;
+} else {
+  __templateData;
+}
+});
+
+;require.register("posts/second_post", function(exports, require, module) {
+var __templateData = "<h1 id=\"hello-\">hello!</h1>\n<h2 id=\"how-are-you-\">How are you?</h2>\n<p><a href=\"http://google.com\">link</a></p>\n";
+if (typeof define === 'function' && define.amd) {
+  define([], function() {
+    return __templateData;
+  });
+} else if (typeof module === 'object' && module && module.exports) {
+  module.exports = __templateData;
+} else {
+  __templateData;
+}
 });
 
 ;

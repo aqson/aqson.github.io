@@ -29,7 +29,7 @@ Header = React.createClass
         img className: "cloud", src:"/img/cloud.png"
 
       div className: "title",
-        h3 'Artem'
+        h3 'Artie'
         h1 'Yavorsky'
 
       div className: "header-bottom",

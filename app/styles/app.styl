@@ -16,9 +16,13 @@ multipleBoxShadow(n)
 
 //stars
 
-$bigStars    = multipleBoxShadow(700)
-$mediumStars = multipleBoxShadow(200)
-$smallStarts = multipleBoxShadow(100)
+// $bigStars    = multipleBoxShadow(700)
+// $mediumStars = multipleBoxShadow(200)
+// $smallStarts = multipleBoxShadow(100)
+
+$bigStars    = 1
+$mediumStars = 1
+$smallStarts = 1
 
 //Colors
 
@@ -301,68 +305,3 @@ header.header
   height: 1300px //DEV
   background: $white
   transition: all .8s ease
-
-  header.content-header
-
-    .title
-      margin: auto
-      text-align: center
-      color: $black
-      z-index: 5
-      transition: color .8s ease
-
-      h1
-        font-size: 4em
-        font-weight: 300
-        letter-spacing: 5px
-
-      h3
-        margin-top: 20px
-        font-size: 1.5em
-        font-weight: 300
-        color: $dark
-
-  .reviews
-    padding: 0 14%
-    margin: 100px auto 100px auto
-
-    ul
-      display: flex
-      flex-direction: row
-      flex-wrap: wrap
-      justify-content: space-between
-      align-items: center
-
-
-    li
-      display: inline-block
-      border-right: 3px solid $gray
-      padding: 10px 20px
-      max-width: 450px
-      margin: 10px
-
-      p
-        color: $dark
-
-        &:before
-          color: $gray
-          content: open-quote
-          font-size: 4em
-          line-height: 0.1em
-          margin-right: 0.1em
-          vertical-align: -0.4em
-
-      .reviewer
-        margin-top: 15px
-        float: right
-
-        strong
-          font-weight: 600
-
-        a
-          color: $anchor
-
-
-
-
-

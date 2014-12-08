@@ -24,7 +24,8 @@
     "stylus-brunch": ">= 1.0 < 1.8",
     "sass-brunch": ">= 1.0 < 1.8",
     "uglify-js-brunch": ">= 1.0 < 1.8",
-    "express": "~4.9.x"
+    "express": "~4.9.x",
+    "markdown-brunch": "~1.7.2"
   },
   "engines": {
     "node": "0.10.x"

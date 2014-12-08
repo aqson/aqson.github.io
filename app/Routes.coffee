@@ -10,6 +10,7 @@ module.exports =
   Route path: '/', handler: mount('App'),
     Route name: 'about',   handler: mount('About')
     Route name: 'posts',   handler: mount('Posts')
+    Route name: 'post', handler: mount('Post'), path: 'post/:name'
     #Route name: 'contact', handler: mount('Contact')
 
     # nav_items.map (item) ->

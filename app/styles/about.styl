@@ -1,40 +1,64 @@
-// .about
-//   display: flex
+.about
+  header.content-header
+    .title
+      margin: auto
+      text-align: center
+      color: $black
+      z-index: 5
+      transition: color .8s ease
 
-//   .reviews
-//     padding: 5em 3em
-//     margin: auto
-//     max-width: 700px
+      h1
+        font-size: 4em
+        font-weight: 300
+        letter-spacing: 5px
 
-//     .review
-//       color: #5C493D
-//       padding: .3em
-//       //background: rgba(0,0,0,.5)
-//       border-right: 5px solid #3A352F
-//       //box-shadow:1px 3px 3px rgba(0,0,0,0.3)
+      h3
+        margin-top: 20px
+        font-size: 1.5em
+        font-weight: 300
+        color: $dark
 
-//       &-body
-//         font-size: 16px
+  .reviews
+    padding: 0 14%
+    margin: 100px auto 100px auto
 
-//         &:before
-//           color: #80D3BB;
-//           content: open-quote;
-//           font-size: 4em;
-//           line-height: 0.1em;
-//           margin-right: 0.25em;
-//           vertical-align: -0.4em;
+    ul
+      display: flex
+      flex-direction: row
+      flex-wrap: wrap
+      justify-content: space-between
+      align-items: center
 
-//       &-autor
-//         text-align: right
-//         font-size: 14px
-//         padding-top: 1em
 
-//         > div
-//           display: inline-block
-//           margin-right: 10px
+    li
+      display: inline-block
+      border-right: 3px solid $gray
+      padding: 10px 20px
+      max-width: 450px
+      margin: 10px
 
-//         &-name
-//           font-weight: 600
+      p
+        color: $dark
 
-//         &-role
-//           font-weight: 100
+        &:before
+          color: $gray
+          content: open-quote
+          font-size: 4em
+          line-height: 0.1em
+          margin-right: 0.1em
+          vertical-align: -0.4em
+
+      .reviewer
+        margin-top: 15px
+        float: right
+
+        strong
+          font-weight: 600
+
+        a
+          color: $anchor
+
+
+
+
+
