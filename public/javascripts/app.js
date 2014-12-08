@@ -91,16 +91,19 @@
   globals.require.brunch = true;
 })();
 require.register("About", function(exports, require, module) {
-var About, Header, Reviews, a, div, h1, h3, header, li, p, span, strong, ul, _ref;
+var About, Header, Reviews, a, div, h1, h3, header, li, me, p, span, strong, ul, _ref;
 
 Reviews = require('./Reviews');
 
 Header = require('./Header');
 
+me = require('posts/me');
+
 _ref = require('lib/dom-helpers'), div = _ref.div, header = _ref.header, h1 = _ref.h1, h3 = _ref.h3, p = _ref.p, strong = _ref.strong, span = _ref.span, a = _ref.a, ul = _ref.ul, li = _ref.li;
 
 About = React.createClass({
   render: function() {
+    console.log(me);
     return div(null, div({
       className: 'spacer minimized'
     }), div({
@@ -109,7 +112,13 @@ About = React.createClass({
       className: 'content-header'
     }, div({
       className: 'title'
-    }, h1('Web Consultant'), h3("There's no crying in web development! I'll take care of it!"))))));
+    }, h1('Web Consultant'), h3("There's no crying in web development! I'll take care of it!")), div({
+      className: 'about-paragraph'
+    }, div({
+      dangerouslySetInnerHTML: {
+        __html: me
+      }
+    }))))));
   }
 });
 
@@ -117,7 +126,7 @@ module.exports = About;
 });
 
 ;require.register("App", function(exports, require, module) {
-var App, Header, Link, RouteHandler, State, block, config, div, downPosition, header, li, previous, upPosition, _ref, _ref1;
+var App, Header, Link, RouteHandler, State, a, block, config, div, downPosition, header, li, previous, span, upPosition, _ref, _ref1;
 
 Header = require('./Header');
 
@@ -131,7 +140,7 @@ block = false;
 
 _ref = [76, 150], downPosition = _ref[0], upPosition = _ref[1];
 
-_ref1 = require('lib/dom-helpers'), div = _ref1.div, header = _ref1.header, li = _ref1.li;
+_ref1 = require('lib/dom-helpers'), div = _ref1.div, header = _ref1.header, li = _ref1.li, span = _ref1.span, a = _ref1.a;
 
 App = React.createClass({
   mixins: [State],
@@ -181,7 +190,11 @@ App = React.createClass({
       minimized: minimized
     }), div({
       className: "spacer " + (minimized ? 'minimized' : '')
-    }), RouteHandler());
+    }), RouteHandler(), div({
+      className: 'footer'
+    }, span('All content here is in '), a({
+      href: 'http://creativecommons.org/publicdomain/zero/1.0/'
+    }, 'public domain. '), span('An attribution would be nice though.')));
   }
 });
 
@@ -189,23 +202,29 @@ module.exports = App;
 });
 
 ;require.register("Contact", function(exports, require, module) {
-var Reviews, a, div, h1, li, me, ul, _ref;
+var Reviews, a, div, h1, li, me, span, ul, _ref;
 
 me = require('config').me;
 
-_ref = require('lib/dom-helpers'), div = _ref.div, ul = _ref.ul, li = _ref.li, a = _ref.a, h1 = _ref.h1;
+_ref = require('lib/dom-helpers'), div = _ref.div, ul = _ref.ul, li = _ref.li, a = _ref.a, h1 = _ref.h1, span = _ref.span;
 
 Reviews = React.createClass({
   render: function() {
     return div({
       className: 'contact content'
-    }, h1('Contact me: '), ul(null, li(null, a({
+    }, h1('Contact/follow me: '), ul(null, li(null, span("" + me.email)), li(null, a({
       href: "mailto:" + me.email
-    }, "" + me.email)), li(null, a({
+    }, "Email"), "/", a({
+      href: "imessage:" + me.email
+    }, "iMessage"), "/", a({
+      href: "facetime:" + me.email
+    }, "Facetime")), li(null, a({
       href: me.twitter
-    }, "Twitter/aqson")), li(null, a({
+    }, "Twitter")), li(null, a({
       href: me.facebook
-    }, 'Facebook/aqson'))));
+    }, 'Facebook')), li(null, a({
+      href: me.vk
+    }, 'VK'))));
   }
 });
 
@@ -422,9 +441,6 @@ module.exports = Route({
   path: '/',
   handler: mount('App')
 }, Route({
-  name: 'about',
-  handler: mount('About')
-}), Route({
   name: 'posts',
   handler: mount('Posts'),
   path: 'posts'
@@ -435,6 +451,9 @@ module.exports = Route({
 }), Route({
   name: 'contact',
   handler: mount('Contact')
+}), DefaultRoute({
+  name: 'about',
+  handler: mount('About')
 }));
 });
 
@@ -468,6 +487,7 @@ config.me = {
   twitter: "http://twitter.com/aqson",
   github: "http://github.com/yavorsky",
   facebook: "http://facebook.com/aqson",
+  vk: "http://vk.com/aqson",
   email: "info@yavorsky.org"
 };
 
@@ -567,6 +587,19 @@ if (typeof define === 'function' && define.amd) {
 
 ;require.register("posts/liberty/first_post", function(exports, require, module) {
 var __templateData = "<h1 id=\"111\">111</h1>\n<h1 id=\"111\">111</h1>\n<h1 id=\"111\">111</h1>\n<h1 id=\"111\">111</h1>\n<h1 id=\"111\">111</h1>\n<h1 id=\"111\">111</h1>\n<h1 id=\"111\">111</h1>\n<h1 id=\"111\">111</h1>\n<h1 id=\"111\">111</h1>\n";
+if (typeof define === 'function' && define.amd) {
+  define([], function() {
+    return __templateData;
+  });
+} else if (typeof module === 'object' && module && module.exports) {
+  module.exports = __templateData;
+} else {
+  __templateData;
+}
+});
+
+;require.register("posts/me", function(exports, require, module) {
+var __templateData = "<p>Hi, I am Artem Yavorsky (sometimes aqson) - <strong>web consultant</strong> with experience in 3 years.</p>\n<p>I love <strong>useful projects</strong>. I don&#39;t like useless work even if it help to bring money.</p>\n<p>I am <strong>full-stack developer</strong>, that can work as at front-end using javascript/coffeescript with many frameworks, so back-end, especially, using Ruby(Rails/Sinatra), Node.js and Go. Also, I am ready to help with iOS projects using Swift. I love to use &quot;trending&quot; approaches and be a part of its development process. I am contributor in some huge open-source projetcs like <a href=\"https://github.com/hellyeahllc/exim\">Exim</a> and <a href=\"http://yang.github.io/reactive-coffee\">Reactive-coffee</a>.</p>\n<p>Now, I am working with awesome team - <strong>Hellyeah</strong>. We solve problems related to online businesses and making open-source.</p>\n<p>I am traveling, learning law, playing football and love my beautiful girlfriend.</p>\n<p>Follow me on <a href=\"https://twitter.com/aqson\">twitter</a> and <a href=\"https://github.com/yavorsky\">github</a> or  <a href=\"contact\">contact</a> me for fruitful cooperation.</p>\n";
 if (typeof define === 'function' && define.amd) {
   define([], function() {
     return __templateData;

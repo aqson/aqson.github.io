@@ -5,7 +5,7 @@ previous = null
 block = false
 [downPosition, upPosition] = [76, 150]
 
-{div, header, li} = require 'lib/dom-helpers'
+{div, header, li, span, a} = require 'lib/dom-helpers'
 
 
 App = React.createClass
@@ -32,5 +32,11 @@ App = React.createClass
       Header(minimized: minimized)
       div className: "spacer #{if minimized then 'minimized' else ''}"
       RouteHandler()
+      div className: 'footer',
+        span 'All content here is in '
+        a href: 'http://creativecommons.org/publicdomain/zero/1.0/', 'public domain. '
+        span 'An attribution would be nice though.'
+
+
 
 module.exports = App
