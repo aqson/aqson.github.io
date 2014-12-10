@@ -31,11 +31,12 @@ App = React.createClass
     div className: 'app', onWheel: check,
       Header(minimized: minimized)
       div className: "spacer #{if minimized then 'minimized' else ''}"
-      RouteHandler()
-      div className: 'footer',
-        span 'All content here is in '
-        a href: 'http://creativecommons.org/publicdomain/zero/1.0/', 'public domain. '
-        span 'An attribution would be nice though.'
+      div className: 'main',
+        RouteHandler()
+        div className: 'footer',
+          span 'All content here is in '
+          a href: 'http://creativecommons.org/publicdomain/zero/1.0/', 'public domain. '
+          span 'An attribution would be nice though.'
 
 
 

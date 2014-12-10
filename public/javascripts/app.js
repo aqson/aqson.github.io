@@ -104,9 +104,7 @@ _ref = require('lib/dom-helpers'), div = _ref.div, header = _ref.header, h1 = _r
 About = React.createClass({
   render: function() {
     console.log(me);
-    return div(null, div({
-      className: 'spacer minimized'
-    }), div({
+    return div({
       className: 'about content'
     }, div(null, header({
       className: 'content-header'
@@ -118,7 +116,7 @@ About = React.createClass({
       dangerouslySetInnerHTML: {
         __html: me
       }
-    }))))));
+    })))));
   }
 });
 
@@ -190,11 +188,13 @@ App = React.createClass({
       minimized: minimized
     }), div({
       className: "spacer " + (minimized ? 'minimized' : '')
-    }), RouteHandler(), div({
+    }), div({
+      className: 'main'
+    }, RouteHandler(), div({
       className: 'footer'
     }, span('All content here is in '), a({
       href: 'http://creativecommons.org/publicdomain/zero/1.0/'
-    }, 'public domain. '), span('An attribution would be nice though.')));
+    }, 'public domain. '), span('An attribution would be nice though.'))));
   }
 });
 
@@ -202,29 +202,24 @@ module.exports = App;
 });
 
 ;require.register("Contact", function(exports, require, module) {
-var Reviews, a, div, h1, li, me, span, ul, _ref;
+var Reviews, a, div, h1, li, link, me, span, ul, _ref;
 
 me = require('config').me;
 
 _ref = require('lib/dom-helpers'), div = _ref.div, ul = _ref.ul, li = _ref.li, a = _ref.a, h1 = _ref.h1, span = _ref.span;
 
+link = function(url, name) {
+  return a({
+    target: '_blank',
+    href: url
+  }, name);
+};
+
 Reviews = React.createClass({
   render: function() {
     return div({
       className: 'contact content'
-    }, h1('Contact/follow me: '), ul(null, li(null, span("" + me.email)), li(null, a({
-      href: "mailto:" + me.email
-    }, "Email"), "/", a({
-      href: "imessage:" + me.email
-    }, "iMessage"), "/", a({
-      href: "facetime:" + me.email
-    }, "Facetime")), li(null, a({
-      href: me.twitter
-    }, "Twitter")), li(null, a({
-      href: me.facebook
-    }, 'Facebook')), li(null, a({
-      href: me.vk
-    }, 'VK'))));
+    }, h1('Contact/follow me: '), ul(null, li(null, span("" + me.email)), li(null, link("mailto:" + me.email, "Email"), "/", link("imessage:" + me.email, "iMessage"), "/", link("facetime:" + me.email, "Facetime")), li(null, link(me.twitter, "Twitter")), li(null, link(me.linkedin, "LinkedIn")), li(null, link(me.facebook, 'Facebook')), li(null, link(me.vk, 'VK'))));
   }
 });
 
@@ -487,6 +482,7 @@ config.me = {
   twitter: "http://twitter.com/aqson",
   github: "http://github.com/yavorsky",
   facebook: "http://facebook.com/aqson",
+  linkedin: "https://www.linkedin.com/profile/view?id=242811669",
   vk: "http://vk.com/aqson",
   email: "info@yavorsky.org"
 };

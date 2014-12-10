@@ -32,9 +32,12 @@ html
 
 .app
   font-family: 'Raleway'
-  display: flex
-  flex-direction: column
-  flex-wrap: wrap
+  position: absolute
+  top: 0
+  right: 0
+  bottom: 0
+  left: 0
+
   //background: #FEF9F0
 
 @-webkit-keyframes rotate
@@ -59,7 +62,7 @@ html
   from
     height: 300px
   to
-    height: 30px
+    height: 0
 
 a
   color: $anchor
@@ -72,7 +75,7 @@ a
   height: 0
 
   &.minimized
-    height: 30px
+    height: 0
     animation: sideSpacer .8s ease 1
 
 header.header
@@ -294,11 +297,15 @@ header.header
 .footer
   text-align: center
   margin: 60px
+  padding-bottom: 20px
 
 
-.content
-  display: flex
-  margin-top: 120px
-  flex-direction: column
-  background: $white
-  transition: all .8s ease
+.main
+  padding-top: 120px
+  height: 100%
+
+  .content
+    display: flex
+    flex-direction: column
+    background: $white
+    transition: all .8s ease

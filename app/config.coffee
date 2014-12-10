@@ -7,6 +7,7 @@ config.me = {
   twitter: "http://twitter.com/aqson"
   github: "http://github.com/yavorsky"
   facebook: "http://facebook.com/aqson"
+  linkedin: "https://www.linkedin.com/profile/view?id=242811669"
   vk: "http://vk.com/aqson"
   email: "info@yavorsky.org"
 }

@@ -1,6 +1,8 @@
 {me} = require 'config'
 {div, ul, li, a, h1, span} = require 'lib/dom-helpers'
 
+link = (url, name) -> a target: '_blank', href: url, name
+
 Reviews = React.createClass
   render: ->
     div className: 'contact content',
@@ -9,17 +11,19 @@ Reviews = React.createClass
         li null,
           span "#{me.email}"
         li null,
-          a href: "mailto:#{me.email}", "Email"
+          link "mailto:#{me.email}", "Email"
           "/"
-          a href: "imessage:#{me.email}", "iMessage"
+          link "imessage:#{me.email}", "iMessage"
           "/"
-          a href: "facetime:#{me.email}", "Facetime"
+          link "facetime:#{me.email}", "Facetime"
         li null,
-          a href: me.twitter, "Twitter"
+          link me.twitter, "Twitter"
         li null,
-          a href: me.facebook, 'Facebook'
+          link me.linkedin, "LinkedIn"
         li null,
-          a href: me.vk, 'VK'
+          link me.facebook, 'Facebook'
+        li null,
+          link me.vk, 'VK'
 
 
 module.exports = Reviews
