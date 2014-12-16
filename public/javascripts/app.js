@@ -128,13 +128,13 @@ var App, Header, Link, RouteHandler, State, a, block, config, div, downPosition,
 
 Header = require('./Header');
 
-RouteHandler = ReactRouter.RouteHandler, Link = ReactRouter.Link, State = ReactRouter.State;
-
 config = require('config');
 
 previous = null;
 
 block = false;
+
+RouteHandler = ReactRouter.RouteHandler, Link = ReactRouter.Link, State = ReactRouter.State;
 
 _ref = [76, 150], downPosition = _ref[0], upPosition = _ref[1];
 

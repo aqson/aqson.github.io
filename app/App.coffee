@@ -1,12 +1,10 @@
-Header = require './Header'
-{RouteHandler, Link, State} = ReactRouter
-config = require 'config'
+Header   = require './Header'
+config   = require 'config'
 previous = null
-block = false
-[downPosition, upPosition] = [76, 150]
-
-{div, header, li, span, a} = require 'lib/dom-helpers'
-
+block    = false
+{RouteHandler, Link, State} = ReactRouter
+[downPosition, upPosition]  = [76, 150]
+{div, header, li, span, a}  = require 'lib/dom-helpers'
 
 App = React.createClass
   mixins: [State]
