@@ -256,6 +256,16 @@ Link = ReactRouter.Link;
 _ref = require('lib/dom-helpers'), div = _ref.div, header = _ref.header, nav = _ref.nav, ul = _ref.ul, li = _ref.li, a = _ref.a, h1 = _ref.h1, h3 = _ref.h3, img = _ref.img;
 
 Header = React.createClass({
+  getInitialState: function() {
+    return {
+      avatar: false
+    };
+  },
+  showAvatar: function() {
+    return this.setState({
+      avatar: true
+    });
+  },
   render: function() {
     var navItems;
     navItems = config.nav_items.map(function(item) {
@@ -300,10 +310,11 @@ Header = React.createClass({
     })), div({
       className: "title"
     }, h3(me.first_name), h1(me.last_name)), div({
-      className: "header-bottom"
+      className: "header-bottom " + (this.state.avatar ? 'visible' : void 0)
     }, img({
       className: "avatar",
-      src: me.img_url
+      src: me.img_url,
+      onLoad: this.showAvatar
     })));
   }
 });
