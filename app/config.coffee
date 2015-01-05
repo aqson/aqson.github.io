@@ -3,6 +3,7 @@ config = {}
 config.me = {
   first_name: "Artem"
   last_name: "Yavorsky"
+  # img_url: "https://avatars2.githubusercontent.com/u/1521229?v=3&s=400"
   img_url: "/img/avatar.png"
   twitter: "http://twitter.com/aqson"
   github: "http://github.com/yavorsky"
