@@ -1,10 +1,6 @@
-{nav_items} = require 'config'
-
 {Route, DefaultRoute} = ReactRouter
 
-mount = (name) -> require "./#{name}"
-
-first = nav_items[0]
+mount = (name) -> require "./components/#{name}"
 
 module.exports =
   Route path: '/', handler: mount('App'),
@@ -12,9 +8,3 @@ module.exports =
     Route name: 'post', handler: mount('Post'), path: 'posts/:section/:name'
     Route name: 'contact', handler: mount('Contact')
     DefaultRoute name: 'about',   handler: mount('About')
-    #Route name: 'contact', handler: mount('Contact')
-
-    # nav_items.map (item) ->
-    #   {path, handler} = item
-    #   Route name: path, path: path, handler: mount(handler)
-    #DefaultRoute handler: mount(first.handler)

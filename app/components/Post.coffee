@@ -1,5 +1,5 @@
 {State} = ReactRouter
-{div, h1} = require 'lib/dom-helpers'
+{div, h1} = require 'lib/DOM'
 
 Post = React.createClass
   mixins: [State]

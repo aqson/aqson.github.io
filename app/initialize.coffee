@@ -1,5 +1,5 @@
-Routes = require 'Routes'
+routes = require 'routes'
 
 $ ->
-  ReactRouter.run Routes, ReactRouter.HistoryLocation, (Handler) ->
+  ReactRouter.run routes, ReactRouter.HistoryLocation, (Handler) ->
     React.render React.createElement(Handler, null), document.body

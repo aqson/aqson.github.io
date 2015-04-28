@@ -1,6 +1,6 @@
 Reviews = require './Reviews'
 
-{div} = require 'lib/dom-helpers'
+{div} = require 'lib/DOM'
 
 App = React.createClass
   render: ->

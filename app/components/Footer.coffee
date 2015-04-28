@@ -1,6 +1,6 @@
 {Link} = ReactRouter
 
-{div}  = require 'lib/dom-helpers'
+{div}  = require 'lib/DOM'
 
 Footer = React.createClass
   render: ->

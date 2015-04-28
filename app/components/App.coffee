@@ -4,7 +4,7 @@ previous = null
 block    = false
 {RouteHandler, Link, State} = ReactRouter
 [downPosition, upPosition]  = [76, 150]
-{div, header, li, span, a}  = require 'lib/dom-helpers'
+{div, header, li, span, a}  = require 'lib/DOM'
 
 App = React.createClass
   mixins: [State]
@@ -13,7 +13,7 @@ App = React.createClass
 
   wheel: (event) ->
     event.preventDefault() if block
-    position = document.body.scrollTop
+    position = @refs.app.getDOMNode().scrollTop
     if previous < position and position > downPosition and !@state.minimized
       block = true
       setTimeout((=> block = false), 800)
@@ -26,7 +26,7 @@ App = React.createClass
     check = (event) => @wheel(event) if @isActive('about')
     minimized = if @isActive('about') then @state.minimized else true
 
-    div className: 'app', onWheel: check,
+    div className: 'app', onScroll: check, ref: 'app',
       Header(minimized: minimized)
       div className: "spacer #{if minimized then 'minimized' else ''}"
       div className: 'main',

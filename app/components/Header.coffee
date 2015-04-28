@@ -2,7 +2,7 @@ config = require 'config'
 {me} = config
 {Link} = ReactRouter
 
-{div, header, nav, ul, li, a, h1, h3, img}  = require 'lib/dom-helpers'
+{div, header, nav, ul, li, a, h1, h3, img}  = require 'lib/DOM'
 
 Header = React.createClass
   getInitialState: -> avatar: false

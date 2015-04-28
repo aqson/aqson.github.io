@@ -1,6 +1,6 @@
 {reviews} = require 'config'
 
-{div, ul, li, span, i} = require 'lib/dom-helpers'
+{div, ul, li, span, i} = require 'lib/DOM'
 
 reviews = reviews.map (review) ->
   li className: 'review',

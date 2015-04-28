@@ -1,6 +1,6 @@
 Reviews = require './Reviews'
 {blog} = require 'config'
-{div, h3, ul, li, a, span} = require 'lib/dom-helpers'
+{div, h3, ul, li, a, span} = require 'lib/DOM'
 {Link} = ReactRouter
 
 format = (date) -> moment(date).format('D MMM, YYYY')

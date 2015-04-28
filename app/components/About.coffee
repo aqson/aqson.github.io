@@ -2,11 +2,10 @@ Reviews = require './Reviews'
 Header  = require './Header'
 me = require 'posts/me'
 
-{div, header, h1, h3, p, strong, span, a, ul, li} = require 'lib/dom-helpers'
+{div, header, h1, h3, p, strong, span, a, ul, li} = require 'lib/DOM'
 
 About = React.createClass
   render: ->
-    console.log me
     div className: 'about content',
       div null,
         header className: 'content-header',

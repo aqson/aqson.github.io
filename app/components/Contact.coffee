@@ -1,5 +1,5 @@
 {me} = require 'config'
-{div, ul, li, a, h1, span} = require 'lib/dom-helpers'
+{div, ul, li, a, h1, span} = require 'lib/DOM'
 
 link = (url, name) -> a target: '_blank', href: url, name
 
